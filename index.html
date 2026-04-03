@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sergej Cipak — Developer</title>
+  <meta name="description" content="Backend, desktop & DevOps developer based in Serbia. Building reliable software with Python, Linux, and low-level systems." />
+  <meta property="og:title" content="Sergej Cipak — Developer" />
+  <meta property="og:description" content="Backend, desktop & DevOps developer based in Serbia." />
+  <meta property="og:url" content="https://cipak.rs/portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0d;
+      --surface: #161614;
+      --border: rgba(255,255,255,0.08);
+      --border-mid: rgba(255,255,255,0.13);
+      --text: #e8e4dc;
+      --muted: #8d9596;
+      --accent: #3ce5ff;
+      --accent-dim: rgba(184,240,160,0.12);
+      --mono: 'DM Mono', monospace;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Montserrat', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,14,13,0.85);
+      backdrop-filter: blur(12px);
+    }
+    nav .inner {
+      max-width: 780px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
+    }
+    nav .logo {
+      font-family: var(--mono); font-size: 13px; color: var(--accent);
+      letter-spacing: 0.04em; text-decoration: none;
+    }
+    nav .nav-right { display: flex; align-items: center; gap: 2rem; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      letter-spacing: 0.02em; transition: color 0.15s;
+    }
+    nav ul a:hover { color: var(--text); }
+
+    /* ---- LANG TOGGLE ---- */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .lang-btn {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      padding: 5px 10px; border: none; background: transparent;
+      color: var(--muted); cursor: pointer; transition: all 0.15s; line-height: 1;
+    }
+    .lang-btn.active { background: var(--accent); color: #0e0e0d; font-weight: 500; }
+    .lang-btn:not(.active):hover { color: var(--text); }
+    .lang-divider { width: 1px; height: 16px; background: var(--border); flex-shrink: 0; }
+
+    /* ---- TRANSLATION SYSTEM ---- */
+    /* Hide all lang spans by default, show only the active lang */
+    [data-lang] { display: none; }
+    .lang-en [data-lang="en"],
+    .lang-sr [data-lang="sr"] { display: inline; }
+
+    /* ---- HERO ---- */
+    .hero { padding: 110px 0 30px;  }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      letter-spacing: 0.1em; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+    h1 {
+      font-family: var(--sans);
+      font-size: clamp(42px, 7vw, 68px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--text);
+    }
+    h1 em { font-style: italic; color: var(--muted); }
+    .hero-sub {
+      font-size: 16px; color: var(--muted); max-width: 480px;
+      margin-bottom: 2.5rem; font-weight: 300; line-height: 1.75;
+    }
+    .hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+      padding: 10px 20px; border-radius: 4px; text-decoration: none;
+      transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: var(--accent); color: #0e0e0d; font-weight: 500; }
+    .btn-primary:hover { background: #cef7b4; }
+    .btn-ghost { border: 1px solid var(--border-mid); color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+    /* ---- SECTIONS ---- */
+    section { padding: 40px 0; }
+    .section-label {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 2.5rem; display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    h2 { font-family: var(--sans); font-size: 32px; font-weight: 400; margin-bottom: 1.5rem; line-height: 1.2; }
+
+    /* ---- PROJECTS ---- */
+    .projects-grid { display: flex; flex-direction: column; gap: 1px; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 2rem; transition: border-color 0.2s; margin-bottom: 16px;
+    }
+    .project-card:hover { border-color: var(--border-mid); }
+    .project-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem;
+    }
+    .project-name { font-family: var(--sans); font-size: 22px; font-weight: 400; color: var(--text); }
+    .project-links { display: flex; gap: 8px; flex-shrink: 0; }
+    .project-link {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      text-decoration: none; padding: 4px 10px;
+      border: 1px solid var(--border); border-radius: 3px;
+      transition: all 0.15s; letter-spacing: 0.04em;
+    }
+    .project-link:hover { color: var(--accent); border-color: var(--accent); }
+    .project-desc { font-size: 14px; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.7; }
+    .project-detail {
+      font-size: 13px; color: #5a5650; margin-bottom: 1.25rem; line-height: 1.65;
+      padding-left: 12px; border-left: 1px solid var(--border);
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 3px;
+      background: rgba(255,255,255,0.04); color: var(--muted); letter-spacing: 0.04em;
+      border: 1px solid var(--border);
+    }
+    .tag.accent { background: var(--accent-dim); color: var(--accent); border-color: rgba(184,240,160,0.2); }
+
+    /* ---- STACK ---- */
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+    .stack-group-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+    .stack-items { display: flex; flex-direction: column; gap: 4px; }
+    .stack-item { font-size: 14px; color: var(--muted); }
+
+    /* ---- ABOUT ---- */
+    .about-text { font-size: 17px; color: var(--muted); line-height: 1.8; max-width: 580px; }
+    .about-text strong { color: var(--text); font-weight: 400; }
+
+    /* ---- CONTACT ---- */
+    .contact-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      font-family: var(--mono); font-size: 13px; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.04em;
+      display: flex; align-items: center; gap: 8px; transition: color 0.15s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link::before { content: '→'; font-size: 11px; }
+
+    /* ---- FOOTER ---- */
+    footer { padding: 2rem 0; text-align: center; font-family: var(--mono); font-size: 11px; color: #3a3834; letter-spacing: 0.06em; }
+
+    /* ---- FADE IN ---- */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+    .fade:nth-child(1) { animation-delay: 0.05s; }
+    .fade:nth-child(2) { animation-delay: 0.15s; }
+    .fade:nth-child(3) { animation-delay: 0.25s; }
+    .fade:nth-child(4) { animation-delay: 0.35s; }
+
+    /* ---- MOBILE ---- */
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .hero { padding: 110px 0 60px; }
+      .project-header { flex-direction: column; gap: 0.75rem; }
+      section { padding: 60px 0; }
+    }
+  </style>
+</head>
+<body class="lang-sr">
+
+<nav>
+  <div class="inner">
+    <a href="#" class="logo">cipak.rs</a>
+    <div class="nav-right">
+      <ul>
+        <li><a href="#projects"><span data-lang="en">Projects</span><span data-lang="sr">Projekti</span></a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#about"><span data-lang="en">About</span><span data-lang="sr">O meni</span></a></li>
+        <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="sr">Kontakt</span></a></li>
+      </ul>
+      <div class="lang-toggle">
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <div class="lang-divider"></div>
+        <button class="lang-btn active" onclick="setLang('sr')">SR</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow fade">
+      <span data-lang="en">Available for junior/intern roles</span>
+      <span data-lang="sr">Tražim junior/intern poziciju</span>
+    </div>
+    <h1 class="fade">
+      Sergej Čipak<br/>
+      
+    </h1>
+    <p class="hero-sub fade">
+      <span data-lang="en">Backend, desktop &amp; DevOps developer based in Novi Sad, Serbia.
+      I write Python, play with Linux servers, and care about software that's
+      actually useful in real life.</span>
+      <span data-lang="sr">Backend, desktop & DevOps developer iz Novog Sada.
+      Poznajem Python, upravljam Linux serverima, i zanima me softver koji je zapravo
+    koristan u stvarnosti</span>
+    </p>
+    <div class="hero-links fade">
+      <a href="cv.pdf" class="btn btn-primary" download>
+        <span data-lang="en">Download CV</span>
+        <span data-lang="sr">Preuzmi CV</span>
+      </a>
+      <a href="https://github.com/cipak6" class="btn btn-ghost" target="_blank">GitHub ↗</a>
+      <a href="https://linkedin.com/in/yourprofile" class="btn btn-ghost" target="_blank">LinkedIn ↗</a>
+    </div>
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">
+      <span data-lang="en">Projects</span>
+      <span data-lang="sr">Projekti</span>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1: Računi -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">Računi - Managment</div>
+          <div class="project-links">
+            <a href="https://github.com/cipak6/menadzer_racuna" class="project-link" target="_blank">GitHub</a>
+            <a href="#" class="project-link">
+              <span data-lang="en">Download</span>
+              <span data-lang="sr">Preuzmi</span>
+            </a>
+          </div>
+        </div>
+        <p class="project-desc">
+          <span data-lang="en">Desktop app for managing Serbian fiscal invoices. Scrapes purs.gov.rs,
+          decodes QR codes, exports to Excel, and generates receipt images, from a simple GUI.</span>
+          <span data-lang="sr">Desktop aplikacija za menadžment fiskalnih računa. Scrapuje podatke sa purs.gov.rs,
+          dekodira QR kodove, exportuje u Excel, i generiše slike računa, sa prostim GUI</span>
+        </p>
+        <p class="project-detail">
+          <span data-lang="en">The main challenge was reliable QR decoding on Windows ARM(Paralels), pyzbar failed due to missing
+          DLLs, so I replaced it with zxing-cpp and packaged everything with PyInstaller.
+          CI/CD via GitHub Actions builds Windows and macOS releases automatically on every tag push.</span>
+          <span data-lang="sr">Glavni izazov je bilo pouzdano QR dekodiranje na Windows ARM(Paralels), pyzbar nije radio zbog nedostajucih
+          DLL biblioteka, zamenio sa zxing-cpp i spakovao sve sa PyInstaller.
+          CI/CD preko GitHub Actions pravi Windows i macOS release automatski na svakom tag push.</span>
+        </p>
+        <div class="tags">
+          <span class="tag accent">Python</span>
+          <span class="tag">CustomTkinter</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">PyInstaller</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">zxing-cpp</span>
+          <span class="tag">Windows / macOS</span>
+        </div>
+      </div>
+
+      <!-- Project 2: Home Server -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">
+            <span data-lang="en">Debian Home Server</span>
+            <span data-lang="sr">Debian kućni server</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <span data-lang="en">Write-up</span>
+              <span data-lang="sr">Write-up</span>
+            </a>
+          </div>
+        </div>
+        <p class="project-desc">
+          <span data-lang="en">Self-hosted Linux server running Home Assistant, Nginx reverse proxy, and
+          containerised services via Docker Compose, managed remotely over SSH.</span>
+          <span data-lang="sr">Linux server koji pokrece Home Assistant, Nginx reverse proxy, i
+          docker usluge preko Docker Compose, upravlja se isključivo preko SSH.</span>
+        </p>
+        <p class="project-detail">
+          <span data-lang="en">Set up from bare metal: partitioning, network config, SSH hardening, firewall rules,
+          Let's Encrypt TLS, and automated Docker and systemd service restarts. Learned the hard way that
+          DNS resolution inside containers needs complex configuration.</span>
+          <span data-lang="sr">Konfigursan od nule: partioning, network config, SSH hardening, firewall pravila,
+          Let's Encrypt TLS, i automatski restartovi Docker i systemd servisi. Naučio sam na tezi način da
+          DNS resolution unutar kontejnera zahteva kompleksnu konfiguraciju.</span>
+        </p>
+        <div class="tags">
+          <span class="tag accent">Debian Linux</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Nginx</span>
+          <span class="tag">Home Assistant</span>
+          <span class="tag">SSH</span>
+          <span class="tag">Let's Encrypt</span>
+        </div>
+      </div>
+
+      <!-- Project 3: Placeholder -->
+      <div class="project-card" style="border-style: dashed; opacity: 0.4;">
+        <div class="project-header">
+          <div class="project-name">
+            <span data-lang="en">Next project</span>
+            <span data-lang="sr">Sledeći projekat</span>
+          </div>
+        </div>
+        <p class="project-desc">
+          <span data-lang="en">Something with ESP32, a REST API, or a CLI tool — coming soon.</span>
+          <span data-lang="sr">Nešto sa ESP32, REST API-jem, ili CLI alatom — uskoro.</span>
+        </p>
+        <div class="tags">
+          <span class="tag">
+            <span data-lang="en">In progress</span>
+            <span data-lang="sr">U toku</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="section-label">
+      <span data-lang="en">Tech stack</span>
+      <span data-lang="sr">Tech stack</span>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <div class="stack-group-label">
+          <span data-lang="en">Languages</span>
+          <span data-lang="sr">Jezici</span>
+        </div>
+        <div class="stack-items">
+          <span class="stack-item">Python</span>
+          <span class="stack-item">C</span>
+          <span class="stack-item">JavaScript</span>
+          <span class="stack-item">SQL</span>
+          <span class="stack-item">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">
+          <span data-lang="en">Infra &amp; OS</span>
+          <span data-lang="sr">Infrastruktura &amp; i OS</span>
+        </div>
+        <div class="stack-items">
+          <span class="stack-item">Debian Linux</span>
+          <span class="stack-item">Docker</span>
+          <span class="stack-item">Nginx</span>
+          <span class="stack-item">SSH / systemd</span>
+          <span class="stack-item">Windows</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">
+          <span data-lang="en">Tools</span>
+          <span data-lang="sr">Tools</span>
+        </div>
+        <div class="stack-items">
+          <span class="stack-item">Git / GitHub Actions</span>
+          <span class="stack-item">PyInstaller</span>
+          <span class="stack-item">SQLite</span>
+          <span class="stack-item">VS Code</span>
+          <span class="stack-item">LaTeX</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">
+          <span data-lang="en">Exploring</span>
+          <span data-lang="sr">Exploring</span>
+        </div>
+        <div class="stack-items">
+          <span class="stack-item">ESP32 / embedded C</span>
+          <span class="stack-item">React / Node.js</span>
+          <span class="stack-item">Ollama / local LLMs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">
+      <span data-lang="en">About</span>
+      <span data-lang="sr">O meni</span>
+    </div>
+    <p class="about-text">
+      <span data-lang="en">I'm a <strong>gap year developer</strong> based in Novi Sad, Serbia, preparing to study
+      Electrical &amp; Computer Engineering at FTN Novi Sad this October.
+      I spend my time building useful software: desktop apps, server infrastructure,
+      and learning low-level tools - and looking for junior roles in
+      <strong>backend development, DevOps, or systems administration and other</strong>.<br/><br/>
+      Long-term I'm interested Electrical engineering, microelectronics, CPU and chip design, low level programming and similar fields. Right now I'm focused on
+      building software that is actually useful to me, and learning as fast as possible. I also love math and physics</span>
+      <span data-lang="sr">Ja sam <strong>gap year developer</strong> koji živi u Novom Sadu, i spremam se da studiram
+      Elektrotehniku i računarstvo na FTN-u u Novom Sadu od ovog oktobra.
+      Provodim vreme pravljenjem softvera - desktop aplikacija, server infrastruktura,
+      i učenjem nekoliko alata - i tražim junior/intern role u
+      <strong>backend development, DevOps, ili administraciji sistema</strong>.<br/><br/>
+      Zanima me Elektrotehnika, mirkoelektronika, dizajn CPU i mikročipova, low level proramiranje i slično. Trenutno sam fokusiran na
+      pravljenje i dizajniranje softvera koji mi zapravo koristi u svakodnevnom životu i učenje. Jako volim matematiku i fiziku.<span>
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">
+      <span data-lang="en">Contact</span>
+      <span data-lang="sr">Kontakt</span>
+    </div>
+    <h2>
+      <span data-lang="en">Let's talk.</span>
+      <span data-lang="sr">Kontakt</span>
+    </h2>
+    <p style="color: var(--muted); font-size: 15px; margin-bottom: 2rem;">
+      <span data-lang="en">Open to junior backend, desktop, DevOps, sysadmin, and other roles in Serbia or remote.</span>
+      <span data-lang="sr">Otvoren za junior backend, desktop, DevOps, sysadmin, i druge pozicije u Srbiji ili na daljinu.</span>
+    </p>
+    <div class="contact-row">
+      <a href="mailto:sergej.cipak@gmail.com" class="contact-link">sergej.cipak@gmail.com</a>
+      <a href="https://github.com/cipak6" class="contact-link" target="_blank">github.com/cipak6</a>
+      <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    self-hosted from my home debian server 
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+    });
+    localStorage.setItem('lang', lang);
+  }
+
+  // Restore saved preference on load
+  var saved = localStorage.getItem('lang');
+  if (saved === 'sr') setLang('sr');
+</script>
+
+</body>
+</html>
