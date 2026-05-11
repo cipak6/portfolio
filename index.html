@@ -82,13 +82,12 @@
     .lang-divider { width: 1px; height: 16px; background: var(--border); flex-shrink: 0; }
 
     /* ---- TRANSLATION SYSTEM ---- */
-    /* Hide all lang spans by default, show only the active lang */
     [data-lang] { display: none; }
     .lang-en [data-lang="en"],
     .lang-sr [data-lang="sr"] { display: inline; }
 
     /* ---- HERO ---- */
-    .hero { padding: 110px 0 30px;  }
+    .hero { padding: 110px 0 30px; }
     .hero-eyebrow {
       font-family: var(--mono); font-size: 12px; color: var(--accent);
       letter-spacing: 0.1em; margin-bottom: 1.5rem;
@@ -232,7 +231,6 @@
     </div>
     <h1 class="fade">
       Sergej Čipak<br/>
-      
     </h1>
     <p class="hero-sub fade">
       <span data-lang="en">Backend, desktop &amp; DevOps developer based in Novi Sad, Serbia.
@@ -240,7 +238,7 @@
       actually useful in real life.</span>
       <span data-lang="sr">Backend, desktop & DevOps developer iz Novog Sada.
       Poznajem Python, upravljam Linux serverima, i zanima me softver koji je zapravo
-    koristan u stvarnosti</span>
+      koristan u stvarnosti</span>
     </p>
     <div class="hero-links fade">
       <a href="cv.pdf" class="btn btn-primary" download>
@@ -280,10 +278,10 @@
           dekodira QR kodove, exportuje u Excel, i generiše slike računa, sa prostim GUI</span>
         </p>
         <p class="project-detail">
-          <span data-lang="en">The main challenge was reliable QR decoding on Windows ARM(Paralels), pyzbar failed due to missing
+          <span data-lang="en">The main challenge was reliable QR decoding on Windows ARM (Parallels), pyzbar failed due to missing
           DLLs, so I replaced it with zxing-cpp and packaged everything with PyInstaller.
           CI/CD via GitHub Actions builds Windows and macOS releases automatically on every tag push.</span>
-          <span data-lang="sr">Glavni izazov je bilo pouzdano QR dekodiranje na Windows ARM(Paralels), pyzbar nije radio zbog nedostajucih
+          <span data-lang="sr">Glavni izazov je bilo pouzdano QR dekodiranje na Windows ARM (Parallels), pyzbar nije radio zbog nedostajucih
           DLL biblioteka, zamenio sa zxing-cpp i spakovao sve sa PyInstaller.
           CI/CD preko GitHub Actions pravi Windows i macOS release automatski na svakom tag push.</span>
         </p>
@@ -336,25 +334,35 @@
         </div>
       </div>
 
-      <!-- Project 3: Placeholder 
-      <div class="project-card" style="border-style: dashed; opacity: 0.4;">
+      <!-- Project 3: EESTech Hackathon -->
+      <div class="project-card">
         <div class="project-header">
           <div class="project-name">
-            <span data-lang="en">Next project</span>
-            <span data-lang="sr">Sledeći projekat</span>
+            <span data-lang="en">Autonomous Driving Agent</span>
+            <span data-lang="sr">Autonomni agent za vožnju</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/cipak6/EESTech-Challenge-2026-Autonomous-Driving-Solution" class="project-link" target="_blank">GitHub</a>
           </div>
         </div>
         <p class="project-desc">
-          <span data-lang="en">Something with ESP32, — coming soon.</span>
-          <span data-lang="sr">Nešto sa ESP32, — uskoro.</span>
+          <span data-lang="en"><strong style="color: var(--text); font-weight: 400;">4th place</strong> at EESTech Challenge 2026. Built a hybrid autonomous driving agent for the MetaDrive simulator — behavioural cloning neural network for steering, rule-based controller for throttle, and a YOLO + Kalman perception pipeline for obstacle avoidance.</span>
+          <span data-lang="sr"><strong style="color: var(--text); font-weight: 400;">4. mesto</strong> na EESTech Challenge 2026. Razvio hibridni autonomni agent za MetaDrive simulator — neuronska mreža trenirana bihejvioralnim kloningom za upravljanje, rule-based kontroler za gas, i YOLO + Kalman pipeline za detekciju i izbegavanje prepreka.</span>
+        </p>
+        <p class="project-detail">
+          <span data-lang="en">Data collection runs in multiple modes (human, DAgger, human-assist) with per-source sample weighting — human steering corrections weighted 3× higher. The perception module runs adaptively: idle at 1 frame per 60, switching to 1 per 5 when lidar detects nearby objects. Risk scoring uses IoU overlap between predicted object boxes and a projected ego corridor.</span>
+          <span data-lang="sr">Prikupljanje podataka radi u više modova (human, DAgger, human-assist) sa ponderisanjem uzoraka po izvoru — ljudske korekcije upravljanja imaju 3× veći težinski koeficijent. Perception modul radi adaptivno: idle na 1 frame od 60, prelazi na 1 od 5 kada lidar detektuje bliske objekte. Procena rizika koristi IoU preklapanje između predviđenih bounding boxova i projektovanog ego koridora.</span>
         </p>
         <div class="tags">
-          <span class="tag">
-            <span data-lang="en">In progress</span>
-            <span data-lang="sr">U toku</span>
-          </span>
+          <span class="tag accent">Python</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">YOLOv8</span>
+          <span class="tag">Kalman Filter</span>
+          <span class="tag">Behavioural Cloning</span>
+          <span class="tag">MetaDrive</span>
+          <span class="tag">NumPy</span>
         </div>
-      </div>-->
+      </div>
 
     </div>
   </section>
@@ -413,6 +421,7 @@
         <div class="stack-items">
           <span class="stack-item">ESP32 / embedded C</span>
           <span class="stack-item">React / Node.js</span>
+          <span class="stack-item">PyTorch / ML</span>
           <span class="stack-item">Ollama / local LLMs</span>
         </div>
       </div>
@@ -431,15 +440,15 @@
       I spend my time building useful software: desktop apps, server infrastructure,
       and learning low-level tools - and looking for junior roles in
       <strong>backend development, DevOps, or systems administration and other</strong>.<br/><br/>
-      Long-term I'm interested Electrical engineering, microelectronics, CPU and chip design, low level programming and similar fields. Right now I'm focused on
-      building software that is actually useful to me, and learning as fast as possible. I also love math and physics</span>
+      Long-term I'm interested in electrical engineering, microelectronics, CPU and chip design, low level programming and similar fields. Right now I'm focused on
+      building software that is actually useful to me, and learning as fast as possible. I also love math and physics.</span>
       <span data-lang="sr">Ja sam <strong>gap year developer</strong> koji živi u Novom Sadu, i spremam se da studiram
       Elektrotehniku i računarstvo na FTN-u u Novom Sadu od ovog oktobra.
       Provodim vreme pravljenjem softvera - desktop aplikacija, server infrastruktura,
       i učenjem nekoliko alata - i tražim junior/intern role u
       <strong>backend development, DevOps, ili administraciji sistema</strong>.<br/><br/>
-      Zanima me Elektrotehnika, mirkoelektronika, dizajn CPU i mikročipova, low level proramiranje i slično. Trenutno sam fokusiran na
-      pravljenje i dizajniranje softvera koji mi zapravo koristi u svakodnevnom životu i učenje. Jako volim matematiku i fiziku.<span>
+      Zanima me Elektrotehnika, mikroelektronika, dizajn CPU i mikročipova, low level programiranje i slično. Trenutno sam fokusiran na
+      pravljenje i dizajniranje softvera koji mi zapravo koristi u svakodnevnom životu i učenje. Jako volim matematiku i fiziku.</span>
     </p>
   </section>
 
@@ -468,7 +477,7 @@
 
 <footer>
   <div class="container">
-    self-hosted from my home debian server 
+    self-hosted from my home debian server
   </div>
 </footer>
 
@@ -482,7 +491,6 @@
     localStorage.setItem('lang', lang);
   }
 
-  // Restore saved preference on load
   var saved = localStorage.getItem('lang');
   if (saved === 'sr') setLang('sr');
 </script>
